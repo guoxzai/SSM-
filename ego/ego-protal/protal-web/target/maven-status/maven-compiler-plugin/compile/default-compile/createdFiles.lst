@@ -1,0 +1,5 @@
+com\gxz\controller\HomeController.class
+com\gxz\controller\RedisCartController.class
+com\gxz\controller\SessionCartController.class
+com\gxz\controller\SearchController.class
+com\gxz\controller\CookieCatController.class

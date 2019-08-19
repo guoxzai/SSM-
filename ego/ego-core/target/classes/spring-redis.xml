@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+	
+	<bean id="redisClient" class="com.gxz.redis.RedisClient">
+		<constructor-arg name="pool" ref="redisPool"></constructor-arg>
+	</bean>
+	
+	<bean id="redisPool" class="redis.clients.jedis.JedisPool">
+		<constructor-arg name="poolConfig" ref="poolConfig"></constructor-arg>
+		<constructor-arg name="host" value="${redis.host}"></constructor-arg>
+		<constructor-arg name="port" value="${redis.port}"></constructor-arg>
+	</bean>
+	
+	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="minIdle" value="${redis.min.idle}"></property>
+		<property name="maxIdle" value="${redis.max.idle}"></property>
+		<property name="maxTotal" value="${redis.max.total}"></property>
+	</bean>
+	
+</beans>

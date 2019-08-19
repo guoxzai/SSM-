@@ -1,0 +1,272 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.gxz</groupId>
+  <artifactId>ego</artifactId>
+  <version>1.0</version>
+  <packaging>pom</packaging>
+  <name>ego的父项目,依赖管理,版本控制</name>
+  <description>ego的父项目,依赖管理,版本控制</description>
+  <modules>
+  	<module>ego-core</module>
+  	<module>ego-common</module>
+  	<module>ego-manager</module>
+	<module>ego-protal</module>
+	<module>ego-sso</module>
+	<module>ego-message</module>
+	<module>ego-pay</module>
+	<module>ego-order</module>
+  </modules>
+  <properties>
+		<!-- jar 的版本号 -->
+		<!-- 主要声明依赖的版本 -->
+		<junit.version>4.12</junit.version>
+		<spring.version>4.3.17.RELEASE</spring.version>
+		<mybatis.version>3.4.6</mybatis.version>
+		<mybatis-spring.version>1.3.1</mybatis-spring.version>
+		<mysql.version>5.1.30</mysql.version>
+		<!-- 数据库连接池 -->
+		<druid.version>1.1.2</druid.version>
+		<!-- springMvc需要 -->
+		<jackson.version>2.8.9</jackson.version>
+		<!-- 切面 -->
+		<aspectjweaver.version>1.9.2</aspectjweaver.version>
+		<classmate.version>1.3.3</classmate.version>
+		<!-- 上传文件 -->
+		<commons-io.version>2.5</commons-io.version>
+		<commons-fileupload.version>1.3.2</commons-fileupload.version>
+		<!-- json的工具 和fastjso工具类一样 -->
+		<gson.version>2.8.1</gson.version>
+		<hibernate-validator.version>5.4.1.Final</hibernate-validator.version>
+		<!-- jsp -->
+		<jstl.version>1.2</jstl.version>
+		<standard.version>1.1.2</standard.version>
+		<!-- 远程调用 -->
+		<dubbo.version>2.6.4</dubbo.version>
+		<zookeeper.version>3.4.6</zookeeper.version>
+		<zkclient.version>0.10</zkclient.version>
+		<!-- 分页 -->
+		<pagehelper.version>4.2.1</pagehelper.version>
+		<!-- 日志的打印 -->
+		<slf4j-log4j.version>1.7.25</slf4j-log4j.version>
+		<!-- redis -->
+		<jedis.version>2.9.0</jedis.version>
+		<!-- solr -->
+		<solrj.version>7.5.0</solrj.version>
+		<!-- 文件存储 -->
+		<fastdfs.version>1.27-SNAPSHOT</fastdfs.version>
+		<!-- 消息队列 -->
+		<activeMQ.version>5.14.3</activeMQ.version>
+		<servlet.version>3.0.1</servlet.version>
+	</properties>
+
+	<dependencyManagement>
+		<!-- 声明我们项目所用的所有依赖 -->
+		<!-- 添加依赖 -->
+		<dependencies>
+			<!-- 文件上传 到fastdfs -->
+			<dependency>
+				<groupId>org.csource</groupId>
+				<artifactId>fastdfs-client-java</artifactId>
+				<version>${fastdfs.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+			</dependency>
+			<!-- spring 依赖 begin -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<!-- 使用该jar 可以实现activemq 和spring的集成 -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jms</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-all</artifactId>
+				<version>${activeMQ.version}</version>
+			</dependency>
+			<!-- spring 集成junit的测试框架 -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-all -->
+			<!-- spring的事务在这个包里面 -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jdbc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<!-- spring 依赖 end -->
+			<!-- mybatis 依赖 begin -->
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis</artifactId>
+				<version>${mybatis.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis-spring</artifactId>
+				<version>${mybatis-spring.version}</version>
+			</dependency>
+			<!-- mybatis 依赖 end -->
+			<!-- mysql begin -->
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql.version}</version>
+			</dependency>
+			<!-- 数据库连接池 -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid</artifactId>
+				<version>${druid.version}</version>
+			</dependency>
+			<!-- mysql end -->
+			<!-- jackson -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml</groupId>
+				<artifactId>classmate</artifactId>
+				<version>${classmate.version}</version>
+			</dependency>
+			<!-- 切面aop -->
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>${aspectjweaver.version}</version>
+			</dependency>
+
+			<!-- springmvc里面文件上传解析器用的依赖 -->
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons-io.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>${commons-fileupload.version}</version>
+			</dependency>
+
+			<!-- json 工具 -->
+			<dependency>
+				<groupId>com.google.code.gson</groupId>
+				<artifactId>gson</artifactId>
+				<version>${gson.version}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>1.2.47</version>
+			</dependency>
+			<!-- 验证 -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${hibernate-validator.version}</version>
+			</dependency>
+
+			<!-- jsp 相关 -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>jstl</artifactId>
+				<version>${jstl.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>taglibs</groupId>
+				<artifactId>standard</artifactId>
+				<version>${standard.version}</version>
+			</dependency>
+			<!-- 远程调用 -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>dubbo</artifactId>
+				<version>${dubbo.version}</version>
+				<!-- 排除旧版本的spring依赖 -->
+				<exclusions>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<!-- zk -->
+			<dependency>
+				<groupId>org.apache.zookeeper</groupId>
+				<artifactId>zookeeper</artifactId>
+				<version>${zookeeper.version}</version>
+			</dependency>
+			<!-- zk-client -->
+			<dependency>
+				<groupId>com.101tec</groupId>
+				<artifactId>zkclient</artifactId>
+				<version>${zkclient.version}</version>
+			</dependency>
+			<!-- 分页工具 -->
+			<dependency>
+				<groupId>com.github.pagehelper</groupId>
+				<artifactId>pagehelper</artifactId>
+				<version>${pagehelper.version}</version>
+			</dependency>
+			<!-- 日志打印 -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${slf4j-log4j.version}</version>
+			</dependency>
+			<!-- redis -->
+			<dependency>
+				<groupId>redis.clients</groupId>
+				<artifactId>jedis</artifactId>
+				<version>${jedis.version}</version>
+			</dependency>
+
+			<!-- 全文检索 -->
+			<dependency>
+				<groupId>org.apache.solr</groupId>
+				<artifactId>solr-solrj</artifactId>
+				<version>${solrj.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${servlet.version}</version>
+				<scope>provided</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<!-- 声明我们项目所用的所有插件的依赖 tomat7 -->
+			<plugins>
+				<!-- tomcat的插件 -->
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat7-maven-plugin</artifactId>
+					<version>2.2</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+	</build>
+</project>

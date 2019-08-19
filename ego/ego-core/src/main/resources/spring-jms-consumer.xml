@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jms="http://www.springframework.org/schema/jms"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		<!-- 配置jmsTempalte -->
+	<!-- 该连接工厂没有池特效 -->
+	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<constructor-arg name="brokerURL" value="${mq.url}"></constructor-arg>
+		
+		<!--  解决传送消息的json对象序列化权限不够的问题    生产者消费者都需要-->
+	  <property name="trustAllPackages" value="true"></property>
+	</bean>
+	<!-- 该连接工厂有池特效 -->
+	<bean id="cachingConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+		<constructor-arg name="targetConnectionFactory" ref="connectionFactory"></constructor-arg>
+		<property name="sessionCacheSize" value="${mq.session.num}"></property>
+	</bean>
+	<bean id="containerFactory" class="org.springframework.jms.config.SimpleJmsListenerContainerFactory">
+		<property name="connectionFactory" ref="cachingConnectionFactory"></property>
+		<!-- 客户端签收 方式    事务还是非事务-->
+		<property name="sessionAcknowledgeMode" value="${mq.session.ack}" />
+		<!-- false queue true topic -->
+		<property name="pubSubDomain" value="false"></property>
+	</bean>
+	<jms:annotation-driven/>
+	<!-- 实现消息的消费和监听 -->
+	<!-- @JmsListener(containerFactory="",destination="",concurrency="") -->
+	<!-- <jms:listener-container acknowledge="client" destination-type="queue" 
+		concurrency="3-5" connection-factory="cachingConnectionFactory"> -->
+	<!-- <jms:listener destination="user.login.queue" ref="userLoginQueueListener"/> -->
+	<!-- </jms:listener-container> -->
+	<context:component-scan base-package="com.gxz.listener"></context:component-scan>
+</beans>

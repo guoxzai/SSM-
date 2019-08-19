@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- <bean id="solrServer" solr4 的方案 -->
+	<!-- class="org.apache.solr.client.solrj.impl.HttpSolrServer"> -->
+	<!-- <constructor-arg name="baseURL" value="${solr.url}"></constructor-arg> -->
+	<!-- </bean> -->
+	<!-- solr 7 的方案 -->
+	<!-- 不能使用builder的baseUrl baseUrl 默认值为builder地址 -->
+	<bean id="builder" class="org.apache.solr.client.solrj.impl.HttpSolrClient.Builder"></bean>
+	<bean id="solrClient" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+		<constructor-arg name="builder" value="builder"></constructor-arg>
+		<property name="baseURL" value="${solr.url}"></property>
+	</bean>
+</beans>
