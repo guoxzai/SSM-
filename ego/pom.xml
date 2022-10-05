@@ -27,7 +27,7 @@
 		<!-- 数据库连接池 -->
 		<druid.version>1.1.2</druid.version>
 		<!-- springMvc需要 -->
-		<jackson.version>2.8.9</jackson.version>
+		<jackson.version>2.12.6.1</jackson.version>
 		<!-- 切面 -->
 		<aspectjweaver.version>1.9.2</aspectjweaver.version>
 		<classmate.version>1.3.3</classmate.version>
